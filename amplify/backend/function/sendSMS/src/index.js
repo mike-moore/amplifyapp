@@ -1,11 +1,4 @@
 const aws = require('aws-sdk');
-const { Parameters } = await (new aws.SSM())
-  .getParameters({
-    Names: ["TWILIO_ACCOUNT_SID","TWILIO_AUTH_TOKEN","TWILIO_PHONE_NUMBER"].map(secretName => process.env[secretName]),
-    WithDecryption: true,
-  })
-  .promise();
-
 
 const client = require('twilio')(
   'ACcfcfc89713b9c606086be57628a2e016',
@@ -13,6 +6,11 @@ const client = require('twilio')(
 );
 
 exports.handler = async (event) => {
+    const { Parameters } = await (new aws.SSM())
+      .getParameters({
+        Names: ["TWILIO_ACCOUNT_SID","TWILIO_AUTH_TOKEN","TWILIO_PHONE_NUMBER"].map(secretName => process.env[secretName]),
+        WithDecryption: true,
+    }).promise();
     // TODO implement
     const response = {
         statusCode: 200,
