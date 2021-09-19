@@ -138,6 +138,28 @@
                   "TWILIO_PHONE_NUMBER"
                 ]
               ]
+            },
+            "TWILIO_NOTIFY_SERVICE_SID": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "sendSMS"
+                      }
+                    ]
+                  },
+                  "TWILIO_NOTIFY_SERVICE_SID"
+                ]
+              ]
             }
           }
         },

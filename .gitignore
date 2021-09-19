@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
+.vscode/launch.json
+
+amplify/backend/function/sendSMS/src/event.json
 
 # testing
 /coverage

@@ -19,7 +19,7 @@
         "sendSMS": {
           "secretsPathAmplifyAppId": "d2vve0n5c1u9od",
           "deploymentBucketName": "amplify-amplify91410f2a30674-staging-35313-deployment",
-          "s3Key": "amplify-builds/sendSMS-5036774c794235354266-build.zip"
+          "s3Key": "amplify-builds/sendSMS-394d494d36573847472f-build.zip"
         }
       }
     }
