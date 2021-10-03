@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { API, Storage } from 'aws-amplify';
+import { API, Auth, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { listNotes } from './graphql/queries';
 import { createNote as createNoteMutation, deleteNote as deleteNoteMutation } from './graphql/mutations';
+//import { isCompositeComponent } from 'react-dom/test-utils';
 
 const initialFormState = { name: '', description: '' }
 
@@ -14,6 +15,28 @@ function App() {
   useEffect(() => {
     fetchNotes();
   }, []);
+
+  async function postMessage() {
+    const user = await Auth.currentAuthenticatedUser()
+    const token = user.signInUserSession.idToken.jwtToken
+    console.log({ token });
+    const smsData = {
+      message: formData.description,
+      recipients: [formData.name, formData.name],
+    };
+    const requestData = {
+      body: smsData
+    }
+    console.log(requestData);
+    await API
+      .post('smsSendAPI', '/smsSend',requestData)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   async function onChange(e) {
     if (!e.target.files[0]) return
@@ -43,6 +66,7 @@ function App() {
       const image = await Storage.get(formData.image);
       formData.image = image;
     }
+    postMessage();
     setNotes([ ...notes, formData ]);
     setFormData(initialFormState);
   }

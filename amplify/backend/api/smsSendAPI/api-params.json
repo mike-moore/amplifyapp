@@ -1,0 +1,38 @@
+{
+  "paths": [
+    {
+      "name": "/smsSend",
+      "lambdaFunction": "sendSMS",
+      "privacy": {
+        "private": true,
+        "auth": [
+          "/POST"
+        ]
+      },
+      "policyResourceName": "/smsSend"
+    }
+  ],
+  "resourceName": "smsSendAPI",
+  "apiName": "smsSendAPI",
+  "functionArns": [
+    {
+      "lambdaFunction": "sendSMS"
+    }
+  ],
+  "privacy": {
+    "auth": 1,
+    "unauth": 0,
+    "authRoleName": "amplify-amplify91410f2a30674-staging-35313-authRole",
+    "unAuthRoleName": "amplify-amplify91410f2a30674-staging-35313-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "sendSMS",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

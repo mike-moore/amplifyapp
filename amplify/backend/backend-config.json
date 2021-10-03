@@ -42,6 +42,20 @@
           "additionalAuthenticationProviders": []
         }
       }
+    },
+    "smsSendAPI": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "sendSMS",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "storage": {
