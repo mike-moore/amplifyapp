@@ -22,14 +22,14 @@ function App() {
     console.log({ token });
     const smsData = {
       message: formData.description,
-      recipients: [formData.name, formData.name],
+      recipients: [formData.name],
     };
     const requestData = {
       body: smsData
     }
     console.log(requestData);
     await API
-      .post('smsSendAPI', '/smsSend',requestData)
+      .post('smsSendAPI', '/smsSend', requestData)
       .then(response => {
         console.log(response);
       })
@@ -67,26 +67,26 @@ function App() {
       formData.image = image;
     }
     postMessage();
-    setNotes([ ...notes, formData ]);
+    setNotes([...notes, formData]);
     setFormData(initialFormState);
   }
 
   async function deleteNote({ id }) {
     const newNotesArray = notes.filter(note => note.id !== id);
     setNotes(newNotesArray);
-    await API.graphql({ query: deleteNoteMutation, variables: { input: { id } }});
+    await API.graphql({ query: deleteNoteMutation, variables: { input: { id } } });
   }
 
   return (
     <div className="App">
       <h1>My Notes App</h1>
       <input
-        onChange={e => setFormData({ ...formData, 'name': e.target.value})}
+        onChange={e => setFormData({ ...formData, 'name': e.target.value })}
         placeholder="Note name"
         value={formData.name}
       />
       <input
-        onChange={e => setFormData({ ...formData, 'description': e.target.value})}
+        onChange={e => setFormData({ ...formData, 'description': e.target.value })}
         placeholder="Note description"
         value={formData.description}
       />
@@ -95,16 +95,16 @@ function App() {
         onChange={onChange}
       />
       <button onClick={createNote}>Create Note</button>
-      <div style={{marginBottom: 30}}>
+      <div style={{ marginBottom: 30 }}>
         {
           notes.map(note => (
             <div key={note.id || note.name}>
               <h2>{note.name}</h2>
               <p>{note.description}</p>
               {
-                note.image && <img src={note.image} alt="" style={{width: 400}}/>
+                note.image && <img src={note.image} alt="" style={{ width: 400 }} />
               }
-              <br/>
+              <br />
               <button onClick={() => deleteNote(note)}>Delete note</button>
             </div>
           ))
